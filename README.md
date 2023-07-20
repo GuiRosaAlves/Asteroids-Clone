@@ -22,11 +22,6 @@ Compete with your friends to achieve the highest score! The game includes a high
 
 You can play the game directly from your web browser by visiting the **[Asteroids Clone - Play Now!](https://your-game-gh-pages-link/)**
 
-## Screenshots
-
-![Screenshot 1](https://example.com/path/to/screenshot1.png)
-![Screenshot 2](https://example.com/path/to/screenshot2.png)
-
 ## How to Play
 
 1. Clone the repository to your local machine using:
