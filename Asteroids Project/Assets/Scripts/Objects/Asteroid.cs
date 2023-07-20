@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(EdgeWarpingScript))]
-public class Asteroid : MonoBehaviour {
+public class Asteroid : MonoBehaviour
+{
     public ObjectType objType = ObjectType.bigAster;
     public float forceAmount = 100f;
     private Vector2 moveDir;
@@ -23,17 +24,19 @@ public class Asteroid : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        if (coll.gameObject.GetComponent<Player>() != null)
+        var playerColl = coll.gameObject.GetComponent<Player>();
+        var saucerColl = coll.gameObject.GetComponent<Saucer>();
+
+        if (playerColl != null)
         {
             coll.gameObject.GetComponent<Player>().Die();
-            Destroy();
         }
 
-        if(coll.gameObject.GetComponent<Saucer>() != null)
+        if (saucerColl != null)
         {
             coll.gameObject.GetComponent<Saucer>().Destroy();
-            Destroy();
         }
+        Destroy();
     }
 
     public void Destroy()
@@ -73,5 +76,5 @@ public class Asteroid : MonoBehaviour {
         AsteroidSpawnManager.instance.DestroyAsteroid();
         gameObject.SetActive(false);
     }
-	
+
 }

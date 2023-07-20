@@ -19,7 +19,8 @@ public class PlayerInfo
     }
 }
 
-public class HighScoreManager: MonoBehaviour{
+public class HighScoreManager : MonoBehaviour
+{
 
     public GameObject scoreFieldPrefab;
 
@@ -30,11 +31,11 @@ public class HighScoreManager: MonoBehaviour{
     {
         LoadScore();
         int i = 0;
-        while(i < 10 && i < playerScoresDB.Count)
+        while (i < 10 && i < playerScoresDB.Count)
         {
             Transform newScore = Instantiate(scoreFieldPrefab).transform;
             newScore.SetParent(transform);
-            newScore.GetComponent<Text>().text = (i+1)+"°"+playerScoresDB[i].name + "...................." + playerScoresDB[i].score;
+            newScore.GetComponent<Text>().text = (i + 1) + "°" + playerScoresDB[i].name + "...................." + playerScoresDB[i].score;
             i++;
         }
     }
@@ -42,48 +43,42 @@ public class HighScoreManager: MonoBehaviour{
     public static void SaveScore()
     {
         BinaryFormatter bF = new BinaryFormatter();
-        FileStream file = File.Open(Application.persistentDataPath + "/playerScores.dat", FileMode.Create);
+        FileStream file = File.Open(Application.persistentDataPath + "/playerScores.dat", FileMode.OpenOrCreate);
 
         playerScoresDB = playerScoresDB.OrderByDescending(d => d.score).ToList();
 
-        if (file != null)
+        if (file.Length > 0)
         {
             bF.Serialize(file, playerScoresDB);
-            file.Close();
-        }
-        else
-        {
-            Debug.Log("Error! Couldn't create a file");
-        }
-    }
 
+        }
+
+        file.Close();
+    }
     public static void LoadScore()
     {
         BinaryFormatter bF = new BinaryFormatter();
-        FileStream file;
-        if ((file = File.Open(Application.persistentDataPath + "/playerScores.dat", FileMode.Open)) != null)
+        FileStream file = File.Open(Application.persistentDataPath + "/playerScores.dat", FileMode.OpenOrCreate);
+        if (file.Length > 0)
         {
             playerScoresDB = (List<PlayerInfo>)bF.Deserialize(file);
             file.Close();
         }
-        else
-        {
-            Debug.Log("File doesn't exist");
-        }
+        file.Close();
     }
 
     public static void AddScore(string name, int score)
     {
-        foreach(PlayerInfo player in playerScoresDB)
+        foreach (PlayerInfo player in playerScoresDB)
         {
             if (player.name.ToLower() == name.ToLower())
             {
-                if(player.score < score)
+                if (player.score < score)
                     player.score = score;
                 return;
             }
         }
-        
+
         playerScoresDB.Add(new PlayerInfo(name, score));
     }
 
