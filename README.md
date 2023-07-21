@@ -20,7 +20,7 @@ Compete with your friends to achieve the highest score! The game includes a high
 
 ## Try It Out!
 
-You can play the game directly from your web browser by visiting the **[Asteroids Clone - Play Now!](https://your-game-gh-pages-link/)**
+You can play the game directly from your web browser by visiting the **[Asteroids Clone - Play Now!](https://guirosaalves.github.io/Asteroids-Clone/)**
 
 ## How to Play
 
